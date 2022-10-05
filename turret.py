@@ -2,6 +2,7 @@ import numpy as np
 import math
 from conts import WIDTH, HEIGHT
 from bullet import Bullet
+import pygame
 
 
 class Turret(object):
@@ -11,6 +12,7 @@ class Turret(object):
         self.pos = pos
         self.time = 0
         self.fire_speed = 20
+        self.size = 20
 
     def update(self, enemys):
         self.time += 1
@@ -30,4 +32,6 @@ class Turret(object):
             angle = math.atan2(enemy.pos[0]-self.pos[0], enemy.pos[1]-self.pos[1])
             return Bullet(self.pos, angle, 5)
 
+    def draw(self, win):
+        pygame.draw.circle(win, (0,0,0), self.pos, self.size)
 

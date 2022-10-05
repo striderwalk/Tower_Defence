@@ -1,10 +1,12 @@
 import math
-
+import pygame
+from conts import RED
 class Bullet:
     def __init__(self, pos,angle, speed):
         self.pos = pos
         self.angle = angle ## radients
         self.speed = speed
+        self.dead = False
 
 
     def move(self):
@@ -21,7 +23,6 @@ class Bullet:
             if enemy.dead:
                 continue
             if enemy.body.collidepoint(self.pos):
-                print(enemy)
                 hits.append(enemy)
 
         if hits is []:
@@ -37,9 +38,12 @@ class Bullet:
 
 
         if min_index is not None:
-            print(hits[min_index], "hi")
             hits[min_index].die()
-            print(hits[min_index].dead, "hi")
-
             return "die"
+
+    def die():
+        self.deat = True
+
+    def draw(self, win):
+        pygame.draw.circle(win,(RED), self.move(), 5)
  

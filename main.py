@@ -1,12 +1,17 @@
+import json
 from os import environ
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame  # import after disabling prompt
 from conts import *
 from enemy import Enemy
 from turret import Turret
+from mine_guy import Mine_Shooter
 
 
-
+def get_points():
+    with open("./path.json") as file:
+        points = json.load(file)
+    return points
 
 
 def main():
@@ -20,20 +25,24 @@ def main():
 
     # game loop
     enemys = [Enemy()]
-    turrerts = [Turret((4.5*TILE_SIZE,3.5*TILE_SIZE))]
+ 
+    turrerts = [Turret((4.5*TILE_SIZE,5.5*TILE_SIZE)),Mine_Shooter((4.5*TILE_SIZE,3.5*TILE_SIZE), get_points())]
+
     bulets = []
     run = True
-
+    pygame.mixer.music.load("./ExplosionSFX.wav")
+    # pygame.mixer.music.play(-1)
     while run:
-        
+        # if all([i.dead for i in enemys]):
+        #     enemys = [Enemy()]
+
 
         win.blit(baground, (0,0))
 
         dead = []
         for i in enemys:
             if not i.dead:
-                # pygame.draw.rect(win, YELLOW, i.body)
-                pygame.draw.circle(win,BLUE, i.move(), i.size/2)
+                i.draw(win)
             else:
                 dead.append(i)
 
@@ -43,13 +52,16 @@ def main():
 
 
         for i in turrerts:
-            pygame.draw.circle(win,(BLACK), i.pos, 30)
+            i.draw(win)
             if (val := i.update(enemys)):
                 bulets.append(val)
 
         dead = []
         for i in bulets:
-            pygame.draw.circle(win,(RED), i.move(), 5)
+            if i.dead:
+                dead.append(i)
+                continue
+            i.draw(win)
             if i.update(enemys) == "die":
                 dead.append(i)
 
@@ -65,7 +77,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-        clock.tick(60)
+        clock.tick(FPS)
 
     exit()
 
