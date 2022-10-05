@@ -18,6 +18,8 @@ class Bullet:
     def update(self, enemys):
         hits = []
         for enemy in enemys:
+            if enemy.dead:
+                continue
             if enemy.body.collidepoint(self.pos):
                 print(enemy)
                 hits.append(enemy)
@@ -25,17 +27,19 @@ class Bullet:
         if hits is []:
             return 
         min_dis = 1_000_0000_000_000
-        min_index =  -1
+        min_index =  None
 
         for index, i in enumerate(hits):
-            dis =  abs(i.pos[0] - self.pos[0]) + abs(i.pos[1] - self.pos[1])
+            dis = math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
             if dis < min_dis:
                 min_dis = dis
                 min_index = index
 
 
-        if min_index != -1:
+        if min_index is not None:
+            print(hits[min_index], "hi")
             hits[min_index].die()
+            print(hits[min_index].dead, "hi")
 
             return "die"
  

@@ -10,7 +10,7 @@ class Turret(object):
     def __init__(self, pos):
         self.pos = pos
         self.time = 0
-        self.fire_speed = 10
+        self.fire_speed = 20
 
     def update(self, enemys):
         self.time += 1
@@ -28,6 +28,6 @@ class Turret(object):
         if close_enemy is not None:
             enemy = close_enemy
             angle = math.atan2(enemy.pos[0]-self.pos[0], enemy.pos[1]-self.pos[1])
-            return Bullet(self.pos, angle, 26)
+            return Bullet(self.pos, angle, 5)
 
 

@@ -1,5 +1,5 @@
 # constants
-WIDTH, HEIGHT = 832, 640
+WIDTH, HEIGHT = 832, 624    
 TILE_SIZE = 104
 # colours 
 BLACK   =  (  0,   0,   0)

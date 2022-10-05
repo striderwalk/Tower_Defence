@@ -1,18 +1,13 @@
 import numpy as np
 import math
+import json
 from conts import WIDTH, HEIGHT
 import pygame
 
 def get_points():
-    min_x = WIDTH*0.1
-    min_y = HEIGHT*0.1
-    path = [(0,0), (1, 0), (1, 0.5), (0, 0.5), (0,1),(1,1)]
-
-    path = [ (WIDTH * i[0], HEIGHT * i[1]) for i in path]
-    path = [ ((i[0]*0.8)+min_x,(i[1]*0.8)+min_y) for i in path]
-
-    return path
-
+    with open("./path.json") as file:
+        points = json.load(file)
+    return points
 
 class Enemy(object):
     """docstring for Enemy"""
@@ -31,15 +26,16 @@ class Enemy(object):
     def __init__(self):
         self.path = self.make_path()
         self.count = -1
-        self.speed = 5
+        self.speed = 1
         self.dead = False
+        self.size = 45
 
     @property   
     def pos(self):
         return self.path[int(self.count)]
     @property
     def body(self):
-        return pygame.Rect((*self.pos, 10,10))
+        return pygame.Rect((self.pos[0]-self.size/2, self.pos[1]-self.size/2, self.size, self.size))
     def move(self):
         self.count += self.speed
         
@@ -52,5 +48,6 @@ class Enemy(object):
         return self.pos
 
     def die(self):
+        self.count = float("inf")
         self.dead = True
 

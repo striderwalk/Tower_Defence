@@ -10,6 +10,7 @@ from turret import Turret
 
 
 def main():
+    baground = pygame.image.load("./background.png")
     # set up pygame
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -19,15 +20,20 @@ def main():
 
     # game loop
     enemys = [Enemy()]
-    turrerts = [Turret((100,100))]
+    turrerts = [Turret((4.5*TILE_SIZE,3.5*TILE_SIZE))]
     bulets = []
     run = True
+
     while run:
+        
+
+        win.blit(baground, (0,0))
 
         dead = []
         for i in enemys:
-            if not dead:
-                pygame.draw.circle(win,(BLUE), i.move(), 30)
+            if not i.dead:
+                # pygame.draw.rect(win, YELLOW, i.body)
+                pygame.draw.circle(win,BLUE, i.move(), i.size/2)
             else:
                 dead.append(i)
 
@@ -41,9 +47,14 @@ def main():
             if (val := i.update(enemys)):
                 bulets.append(val)
 
+        dead = []
         for i in bulets:
             pygame.draw.circle(win,(RED), i.move(), 5)
-            i.update(enemys)
+            if i.update(enemys) == "die":
+                dead.append(i)
+
+        for i in dead:
+            dead.remove(i)  
 
 
         # update screen
