@@ -3,9 +3,9 @@ from os import environ
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame  # import after disabling prompt
 from conts import *
-from enemy import Enemy
-from turret import Turret
-from mine_guy import Mine_Shooter
+from enemys import Enemy
+from towers import Turret, Mine_Shooter
+
 
 
 def get_points():
@@ -33,8 +33,8 @@ def main():
     pygame.mixer.music.load("./ExplosionSFX.wav")
     # pygame.mixer.music.play(-1)
     while run:
-        # if all([i.dead for i in enemys]):
-        #     enemys = [Enemy()]
+        if all([i.dead for i in enemys]):
+            enemys = [Enemy()]
 
 
         win.blit(baground, (0,0))
