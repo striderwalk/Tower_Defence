@@ -1,21 +1,19 @@
 import json
 from os import environ
-environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+import itertools
+
+environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
 from conts import *
-from enemys import Enemy
-from towers import Turret, Mine_Shooter
-
-
-
-def get_points():
-    with open("./path.json") as file:
-        points = json.load(file)
-    return points
+import enemys
+import towers
+import shots
+from load import path, image
+import health_bar
 
 
 def main():
-    baground = pygame.image.load("./background.png")
+    baground = pygame.image.load("./level/background.png")
     # set up pygame
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -24,50 +22,39 @@ def main():
     # set up game eg payers
 
     # game loop
-    enemys = [Enemy()]
- 
-    turrerts = [Turret((4.5*TILE_SIZE,5.5*TILE_SIZE)),Mine_Shooter((4.5*TILE_SIZE,3.5*TILE_SIZE), get_points())]
+    active_enemys = [enemys.Enemy()]
 
-    bulets = []
+    turrets = [
+        #towers.Turret((4.5 * TILE_SIZE, 5.5 * TILE_SIZE)),
+        towers.Mine_Shooter((2.5 * TILE_SIZE, 2.5 * TILE_SIZE), path.get_points()),
+    ]
+
+    bullets = []
+    health = 100
     run = True
-    pygame.mixer.music.load("./ExplosionSFX.wav")
+    pygame.mixer.music.set_volume(0)
+    pygame.mixer.music.load("./assests/ExplosionSFX.wav")
     # pygame.mixer.music.play(-1)
-    while run:
-        if all([i.dead for i in enemys]):
-            enemys = [Enemy()]
+    counter = itertools.count()
+    for frame in counter:
+        win.blit(baground, (0, 0))
+        health_bar.draw(win, health)
+        if run == False:
+            break
+        # health -= 1
+        print(health)
+        # print(active_enemys, health)
+        if len(active_enemys) <= 10:
+            if frame % 120 == 0:
+                active_enemys.append(enemys.Enemy())
 
 
-        win.blit(baground, (0,0))
+        active_enemys, health = enemys.update(active_enemys,health, win)
 
-        dead = []
-        for i in enemys:
-            if not i.dead:
-                i.draw(win)
-            else:
-                dead.append(i)
+        turrets, new_bullets = towers.update(turrets, active_enemys, win)
+        bullets.extend(new_bullets)
 
-        for i in dead:
-            enemys.remove(i)
-
-
-
-        for i in turrerts:
-            i.draw(win)
-            if (val := i.update(enemys)):
-                bulets.append(val)
-
-        dead = []
-        for i in bulets:
-            if i.dead:
-                dead.append(i)
-                continue
-            i.draw(win)
-            if i.update(enemys) == "die":
-                dead.append(i)
-
-        for i in dead:
-            dead.remove(i)  
-
+        shots.update(bullets, active_enemys, win)
 
         # update screen
         pygame.display.flip()
@@ -77,10 +64,15 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    run = False
         clock.tick(FPS)
 
+    pygame.quit()
     exit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
