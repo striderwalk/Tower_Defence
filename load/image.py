@@ -16,7 +16,7 @@ def get_image(path, size=TILE_SIZE):
 
 
 def get_images(dir, size=DEFULT_SIZE):
-    image = []
+
     for path in glob.glob(f"{dir}/*.png"):
-        image.append(get_image(path, size))
-    return image
+        yield get_image(path, size)
+

@@ -1,7 +1,6 @@
 import json
-from os import environ
 import itertools
-
+from os import environ
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
 from conts import *
@@ -26,7 +25,7 @@ def main():
 
     turrets = [
         #towers.Turret((4.5 * TILE_SIZE, 5.5 * TILE_SIZE)),
-        towers.Mine_Shooter((2.5 * TILE_SIZE, 2.5 * TILE_SIZE), path.get_points()),
+        towers.Mine_Shooter((2.5 * TILE_SIZE, 2.5 * TILE_SIZE)),
     ]
 
     bullets = []
@@ -37,12 +36,13 @@ def main():
     # pygame.mixer.music.play(-1)
     counter = itertools.count()
     for frame in counter:
+
+
         win.blit(baground, (0, 0))
         health_bar.draw(win, health)
         if run == False:
             break
-        # health -= 1
-        print(health)
+
         # print(active_enemys, health)
         if len(active_enemys) <= 10:
             if frame % 120 == 0:

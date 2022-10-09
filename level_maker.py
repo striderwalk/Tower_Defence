@@ -118,10 +118,10 @@ def make(level, path):
 
     with open("./level/path.json", "w") as file:
         grid = [
-                ((i[0]/ TILE_SIZE) -0.5, (i[1]/ TILE_SIZE) -0.5) for i in path[:-1]
+                (int((i[0]/ TILE_SIZE) -0.5)-1, int((i[1]/ TILE_SIZE) -0.5)-1) for i in path[:-1]
             ]
         data = {"cords" : path, "grid": grid}
-        json.dump(data, file)
+        json.dump(data, file, indent=4)
 
 
 if __name__ == "__main__":

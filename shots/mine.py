@@ -3,32 +3,31 @@ import pygame
 import glob
 from conts import FPS, TILE_SIZE
 from load import image
-
+import itertools
 
 class Mine:
     def __init__(self, pos):
 
         self.size = 45
         self.pos = pos
-        self.images = [image.get_image("./assests/mine.png", self.size)]
+        self.images = itertools.cycle(image.get_images("./assests/mine", self.size*2))
+        self.cur_image = next(self.images)
         self.life_left = True
         self.dead = False
-        self.img_index = 0
         self.img_time = 0
         self.img_fps = 5
 
     @property
     def image(self):
-        if len(self.images) == 1:
-            return self.images[-1]
         self.img_time += self.img_fps
         if self.img_time % FPS == 0:
-            self.img_index += 1
-            if self.img_index >= len(self.images):
-                self.img_index -= 1
+            try:
+                self.cur_image = next(self.images)
+            except StopIteration:
                 self.die()
 
-        return self.images[self.img_index]
+        return self.cur_image
+        
     @property
     def body(self):
         return (
@@ -48,15 +47,15 @@ class Mine:
 
         else:
             self.life_left -= 1
-        hit = False
+        hit = []
         for enemy in enemys:
             if enemy.dead:
                 continue
             if math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1]) < TILE_SIZE:
-                hit = True
+                hit.append(enemy)
             # print(math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1]), hit)
 
-        if not hit:
+        if hit is []:
             return
 
         if hit:
@@ -66,11 +65,9 @@ class Mine:
             self.img_time = 0
             self.life_left = 900
 
-        for i in enemys:
-            if i.dead:
-                continue
-            if math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1]) < TILE_SIZE:
-                i.die()
+        for i in hit:            
+            i.die()
+            
     def die(self):
         self.dead = True
 
