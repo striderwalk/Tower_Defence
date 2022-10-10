@@ -3,14 +3,11 @@ import math
 import json
 from conts import WIDTH, HEIGHT, TILE_SIZE
 import pygame
-from load import path
+from load import path, image
 
 
-def get_img(size):
-    # img = pygame.image.load("./assests/enemy.png")
-    img = pygame.image.load("./assests/New_Project_2.png")
-    img = pygame.transform.scale(img, (size, size))
-    return img
+
+
 
 
 class Enemy(object):
@@ -35,8 +32,10 @@ class Enemy(object):
         self.dead = False
         self.size = 90
         self.health = 100
+        self._direction = 0
+        self.cur_rotation = 90
 
-        self.image = get_img(self.size)
+        self.image = image.get_image("./assests/enemy2.png", self.size)
 
     @property
     def pos(self):
@@ -56,6 +55,13 @@ class Enemy(object):
         )
 
     def move(self):
+        if  self.count < len(self.path) - 1:
+            new_pos = self.path[int(self.count)+1]
+            dx = new_pos[0] - self.pos[0]
+            dy = new_pos[1] - self.pos[1]
+            self._direction = math.atan2(dx, dy)
+
+
         if self.health <= 0 or math.isinf(self.count):
             self.die()
             return {"type": "die"}
@@ -78,6 +84,8 @@ class Enemy(object):
         self.health -= dmg
 
     def draw(self, win):
+
+
         pos = self.move()
         if pos["type"] == "die":
             return "die"

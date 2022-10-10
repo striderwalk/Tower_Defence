@@ -25,7 +25,7 @@ def main():
 
     turrets = [
         #towers.Turret((4.5 * TILE_SIZE, 5.5 * TILE_SIZE)),
-        towers.Mine_Shooter((2.5 * TILE_SIZE, 2.5 * TILE_SIZE)),
+        # towers.Mine_Shooter((2.5 * TILE_SIZE, 2.5 * TILE_SIZE)),
     ]
 
     bullets = []
@@ -39,7 +39,9 @@ def main():
 
 
         win.blit(baground, (0, 0))
-        health_bar.draw(win, health)
+        bar = health_bar.get(health/100)
+        win.blit(bar, (WIDTH-bar.get_width(),HEIGHT-bar.get_height()))
+
         if run == False:
             break
 
