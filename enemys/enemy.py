@@ -8,8 +8,6 @@ from load import path, image
 
 
 
-
-
 class Enemy(object):
     """docstring for Enemy"""
 
@@ -32,10 +30,25 @@ class Enemy(object):
         self.dead = False
         self.size = 90
         self.health = 100
-        self._direction = 0
-        self.cur_rotation = 90
+        self.angle = 180
+        self.base_angle = 180
+        self.next_angles = [self.angle]
 
-        self.image = image.get_image("./assests/enemy2.png", self.size)
+        self.base_image = image.get_image("./assests/enemy2-export.png", self.size, rotate=self.angle)
+        self.image = self.base_image       
+        self.img_surf = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
+
+    def rot_center(self, image, angle):
+        # https://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame#:~:text=at%2012%3A43-,rabbid76,-188k2525%20gold%20badges109109
+        """rotate a Surface, maintaining position."""
+        
+        surf = self.img_surf.copy()
+        topleft = self.pos[0]-self.size/2, self.pos[1]-self.size/2
+        rotated_image = pygame.transform.rotozoom(image, angle, 1)
+        new_rect = rotated_image.get_rect(center = image.get_rect().center)
+
+        surf.blit(rotated_image, new_rect)
+        return surf
 
     @property
     def pos(self):
@@ -55,11 +68,15 @@ class Enemy(object):
         )
 
     def move(self):
-        if  self.count < len(self.path) - 1:
+        if self.count < len(self.path) - 1:
             new_pos = self.path[int(self.count)+1]
             dx = new_pos[0] - self.pos[0]
             dy = new_pos[1] - self.pos[1]
-            self._direction = math.atan2(dx, dy)
+            angle = math.degrees(math.atan2(dx, dy))
+
+            if len(self.next_angles)  == 0 or self.next_angles[-1] != angle:
+                self.next_angles = list(np.linspace(self.angle, angle, 10))
+            
 
 
         if self.health <= 0 or math.isinf(self.count):
@@ -83,16 +100,20 @@ class Enemy(object):
     def hit(self, dmg=10):
         self.health -= dmg
 
-    def draw(self, win):
 
+
+    def update_image(self):
+        if len(self.next_angles) > 0:
+            self.angle = self.next_angles.pop(0)
+        self.image = self.rot_center(self.base_image, self.angle)
+
+    def draw(self, win):
+        self.update_image()
 
         pos = self.move()
         if pos["type"] == "die":
             return "die"
-        x, y = pos["value"]
-        x -= self.image.get_size()[0] / 2
-        y -= self.image.get_size()[1] / 2
-        win.blit(self.image, (x, y))
+        win.blit(self.image, (self.body[:2]))
         if pos["type"] == "win":
             return "win"
         # pygame.draw.circle(win, (255,255,0), self.pos, 15)

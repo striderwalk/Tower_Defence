@@ -1,0 +1,44 @@
+{ "frames": {
+   "healthbar (base_bar).aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 248, "h": 60 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 248, "h": 60 },
+    "sourceSize": { "w": 248, "h": 60 },
+    "duration": 100
+   },
+   "healthbar (main_bar).aseprite": {
+    "frame": { "x": 0, "y": 60, "w": 248, "h": 60 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 248, "h": 60 },
+    "sourceSize": { "w": 248, "h": 60 },
+    "duration": 100
+   },
+   "healthbar (BAR).aseprite": {
+    "frame": { "x": 0, "y": 120, "w": 248, "h": 60 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 248, "h": 60 },
+    "sourceSize": { "w": 248, "h": 60 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.39-dev",
+  "image": "healthbar.png",
+  "format": "RGBA8888",
+  "size": { "w": 248, "h": 180 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "base_bar", "opacity": 255, "blendMode": "normal" },
+   { "name": "main_bar", "opacity": 255, "blendMode": "normal" },
+   { "name": "BAR", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

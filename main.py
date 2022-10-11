@@ -10,6 +10,14 @@ import shots
 from load import path, image
 import health_bar
 
+############# TODO ###########
+## add money / buying stuff ##
+## placeing code            ##
+## death screen             ##
+##############################
+
+
+
 
 def main():
     baground = pygame.image.load("./level/background.png")
@@ -24,7 +32,7 @@ def main():
     active_enemys = [enemys.Enemy()]
 
     turrets = [
-        #towers.Turret((4.5 * TILE_SIZE, 5.5 * TILE_SIZE)),
+        # towers.Turret((4.5 * TILE_SIZE, 5.5 * TILE_SIZE)),
         # towers.Mine_Shooter((2.5 * TILE_SIZE, 2.5 * TILE_SIZE)),
     ]
 
