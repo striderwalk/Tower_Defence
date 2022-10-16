@@ -1,10 +1,10 @@
-def update(enemys,health,  win):
+def update(enemys, health, win):
     new_dead = []
     for enemy in enemys:
         if not enemy.dead:
             res = enemy.draw(win)
             if res == "win":
-                health -= 1 
+                health -= 1
         else:
             new_dead.append(enemy)
 

@@ -6,8 +6,6 @@ import pygame
 from load import path, image
 
 
-
-
 class Enemy(object):
     """docstring for Enemy"""
 
@@ -34,18 +32,20 @@ class Enemy(object):
         self.base_angle = 180
         self.next_angles = [self.angle]
 
-        self.base_image = image.get_image("./assests/enemy2-export.png", self.size, rotate=self.angle)
-        self.image = self.base_image       
+        self.base_image = image.get_image(
+            "./assests/enemy2-export.png", self.size, rotate=self.angle
+        )
+        self.image = self.base_image
         self.img_surf = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
 
     def rot_center(self, image, angle):
         # https://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame#:~:text=at%2012%3A43-,rabbid76,-188k2525%20gold%20badges109109
         """rotate a Surface, maintaining position."""
-        
+
         surf = self.img_surf.copy()
-        topleft = self.pos[0]-self.size/2, self.pos[1]-self.size/2
+        topleft = self.pos[0] - self.size / 2, self.pos[1] - self.size / 2
         rotated_image = pygame.transform.rotozoom(image, angle, 1)
-        new_rect = rotated_image.get_rect(center = image.get_rect().center)
+        new_rect = rotated_image.get_rect(center=image.get_rect().center)
 
         surf.blit(rotated_image, new_rect)
         return surf
@@ -69,15 +69,13 @@ class Enemy(object):
 
     def move(self):
         if self.count < len(self.path) - 1:
-            new_pos = self.path[int(self.count)+1]
+            new_pos = self.path[int(self.count) + 1]
             dx = new_pos[0] - self.pos[0]
             dy = new_pos[1] - self.pos[1]
             angle = math.degrees(math.atan2(dx, dy))
 
-            if len(self.next_angles)  == 0 or self.next_angles[-1] != angle:
+            if len(self.next_angles) == 0 or self.next_angles[-1] != angle:
                 self.next_angles = list(np.linspace(self.angle, angle, 10))
-            
-
 
         if self.health <= 0 or math.isinf(self.count):
             self.die()
@@ -99,8 +97,6 @@ class Enemy(object):
 
     def hit(self, dmg=10):
         self.health -= dmg
-
-
 
     def update_image(self):
         if len(self.next_angles) > 0:
