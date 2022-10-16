@@ -43,7 +43,6 @@ class Mine_Shooter(object):
         min_dis = 1_000_0000_000_000
         closet_point = None
         for i in PATH:
-            print("hi", i, closet_point)
             dis = abs(self.grid_pos[0] - i[0]) + abs(self.grid_pos[1] - i[1])
             if dis < min_dis:
                 min_dis = dis

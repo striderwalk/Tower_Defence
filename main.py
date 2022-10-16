@@ -10,6 +10,7 @@ import shots
 import health_bar
 from turret_menu import Menu
 from death_screen import death
+import mouse
 
 ############# TODO ###########
 ## add money / buying stuff ##
@@ -73,11 +74,8 @@ def main():
         shots.update(bullets, active_enemys, win)
 
         # update screen
-        pygame.display.flip()
         if health <= 0:
             return death(win, clock)
-
-        win.fill(WHITE)
 
         # check for input
         for event in pygame.event.get():
@@ -88,11 +86,21 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     run = False
 
+
             if event.type == pygame.MOUSEBUTTONDOWN:
-                enemy = side_bar.turrets[side_bar.selection](pygame.mouse.get_pos())
-                print(enemy)
-                turrets.append(enemy)
+                if event.button == 1:
+                    click = mouse.get_pos()
+                    if click["zone"] != "MAIN":
+                        continue
+                    pos = click["value"]
+                    enemy_type = side_bar.turrets[side_bar.selection]
+                    enemy = enemy_type(pos)
+                    turrets.append(enemy)
+
+        ## update pygame ##
         clock.tick(FPS)
+        pygame.display.flip()
+        win.fill(WHITE)
 
     pygame.quit()
     exit()

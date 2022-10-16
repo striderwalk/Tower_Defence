@@ -1,6 +1,7 @@
 # constants
 WIDTH, HEIGHT = 832, 624
 TILE_SIZE = 104
+SIDEBAR_WIDTH = 104
 FPS = 60
 # colours
 BLACK = (0, 0, 0)
