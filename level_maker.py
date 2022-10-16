@@ -126,13 +126,13 @@ def make(level, path):
 
 if __name__ == "__main__":
     level = [
-        ["b", "b", "b", "b", "b", "b", "b", "b"],
-        ["b", "rt", "r", "rt", "b", "rt", "r", "r"],
-        ["b", "u", "b", "d", "b", "u", "b", "b"],
-        ["b", "u", "b", "d", "b", "u", "b", "b"],
-        ["b", "u", "b", "lt", "r", "lt", "b", "b"],
-        ["b", "u", "b", "b", "b", "b", "b", "b"],
+        ["b", "b", "b", "b", "b", "b", "b"],
+        ["rt", "r", "rt", "b", "rt", "r", "r"],
+        ["u", "b", "d", "b", "u", "b", "b"],
+        ["u", "b", "d", "b", "u", "b", "b"],
+        ["u", "b", "lt", "r", "lt", "b", "b"],
+        ["u", "b", "b", "b", "b", "b", "b"],
     ]
 
-    path = find_path(level, (1, 5))
+    path = find_path(level, (0, 5))
     make(level, path)

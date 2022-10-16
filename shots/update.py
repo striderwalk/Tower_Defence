@@ -1,4 +1,4 @@
-def update(bullets, active_enemys, win):
+def update(win, bullets, active_enemys):
     dead = []
     for bullet in bullets:
         if bullet.dead:

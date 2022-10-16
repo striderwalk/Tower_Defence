@@ -32,7 +32,7 @@ class Button:
 
         if self.clicked:  # show selection
             x, y = self.pos
-            x -= self.size[0] * 0.1  
+            x -= self.size[0] * 0.1
             y -= self.size[1] * 0.1
             w = self.size[0] * 1.2
             h = self.size[1] * 1.2
@@ -77,7 +77,7 @@ class Menu:
             return
 
         mouse_upadate = mouse.get_pos()
-        if mouse_upadate["zone"] != "SIDEBAR": # check for mouse pos
+        if mouse_upadate["zone"] != "SIDEBAR":  # check for mouse pos
             return
 
         pos = mouse_upadate["value"]

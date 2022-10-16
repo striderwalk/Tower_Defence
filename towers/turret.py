@@ -9,7 +9,7 @@ class Turret(object):
     base_image = "./assests/gun.png"
 
     def __init__(self, pos):
-        self.size = 90
+        self.size = 145
         self.pos = pos[0] - self.size / 2, pos[1] - self.size / 2
         self.time = 0
         self.fire_speed = 45
@@ -38,7 +38,7 @@ class Turret(object):
         x, y = self.image.get_rect().center
         x += self.pos[0]
         y += self.pos[1]
-        return (x,y)
+        return (x, y)
 
     def update_image(self):
         self.angle += self.next_angle
@@ -65,9 +65,8 @@ class Turret(object):
             if self.time % self.fire_speed != 0:
                 return
 
-            angle = math.radians(self.angle)#+self.base_angle)
+            angle = math.radians(self.angle)  # +self.base_angle)
             return Bullet(self.center, angle, 5)
-
 
     def draw(self, win):
         self.update_image()

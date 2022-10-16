@@ -3,21 +3,19 @@ from os import environ
 
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
-from conts import WIDTH, HEIGHT, FPS, WHITE
-import enemys
-import towers
-import shots
-import health_bar
+from conts import WIDTH, HEIGHT, FPS, WHITE, SIDEBAR_WIDTH
+
+
 from turret_menu import Menu
 from death_screen import death
 import mouse
+from game import Game
 
 ############# TODO ###########
 ## add money / buying stuff ##
-## placeing code            ## 
+## placeing code            ##
+##    - location checker    ##
 ## death screen             ##
-## fix turret shooting      ##
-## centrel mouse thing      ##
 ## fix mine animation       ##
 ##############################
 
@@ -26,56 +24,33 @@ f = pygame.font.SysFont("ariali", 60)
 
 
 def main():
-    baground = pygame.image.load("./level/background.png")
+
     # set up pygame
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
+    surf = pygame.Surface((WIDTH-SIDEBAR_WIDTH, HEIGHT))
     pygame.display.set_caption("Tower Defense")
     clock = pygame.time.Clock()
 
     # set up game eg payers
-
-    # game loop
-    active_enemys = [enemys.Enemy()]
+    game = Game()
     side_bar = Menu()
 
-    turrets = [
-        # towers.Turret((4.5 * TILE_SIZE, 5.5 * TILE_SIZE)),
-        # towers.Mine_Shooter((2.5 * TILE_SIZE, 2.5 * TILE_SIZE)),
-    ]
-
-    bullets = []
-    health = 100
+    # game loop
     run = True
-    pygame.mixer.music.set_volume(0)
-    pygame.mixer.music.load("./assests/ExplosionSFX.wav")
-    # pygame.mixer.music.play(-1)
+
     counter = itertools.count()
     for frame in counter:
+        if len(game.enemys) <= 10:
+            if frame % 120 == 0:
+                game.add_enemy()
+        draw_surf = game.update(surf.copy())
+        win.blit(draw_surf, (SIDEBAR_WIDTH, 0))
 
-        win.blit(baground, (0, 0))
-        bar = health_bar.get(health / 100)
-        win.blit(bar, (WIDTH - bar.get_width(), HEIGHT - bar.get_height()))
         side_bar.update(win)
 
         if not run:
             break
-
-        # print(active_enemys, health)
-        if len(active_enemys) <= 10:
-            if frame % 120 == 0:
-                active_enemys.append(enemys.Enemy())
-
-        active_enemys, health = enemys.update(active_enemys, health, win)
-
-        turrets, new_bullets = towers.update(turrets, active_enemys, win)
-        bullets.extend(new_bullets)
-
-        shots.update(bullets, active_enemys, win)
-
-        # update screen
-        if health <= 0:
-            return death(win, clock)
 
         # check for input
         for event in pygame.event.get():
@@ -86,7 +61,6 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     run = False
 
-
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     click = mouse.get_pos()
@@ -95,7 +69,7 @@ def main():
                     pos = click["value"]
                     enemy_type = side_bar.turrets[side_bar.selection]
                     enemy = enemy_type(pos)
-                    turrets.append(enemy)
+                    game.turrets.append(enemy)
 
         ## update pygame ##
         clock.tick(FPS)

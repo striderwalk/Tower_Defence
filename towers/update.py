@@ -1,4 +1,4 @@
-def update(turrets, active_enemys, win):
+def update(win, turrets, active_enemys):
     new_bullets = []
     for i in turrets:
         i.draw(win)
