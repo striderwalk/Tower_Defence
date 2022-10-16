@@ -1,6 +1,6 @@
 import math
 import pygame
-from conts import RED
+from conts import RED, WIDTH, HEIGHT
 
 
 class Bullet:
@@ -19,6 +19,13 @@ class Bullet:
         return self.pos
 
     def update(self, enemys):
+        if (
+            self.pos[0] < 0
+            or self.pos[1] < 0
+            or self.pos[0] > WIDTH
+            or self.pos[1] > HEIGHT
+        ):
+            self.die()
         hits = []
         for enemy in enemys:
             if enemy.dead:

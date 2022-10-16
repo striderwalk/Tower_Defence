@@ -13,7 +13,7 @@ from death_screen import death
 
 ############# TODO ###########
 ## add money / buying stuff ##
-## placeing code            ##
+## placeing code            ## 
 ## death screen             ##
 ## fix turret shooting      ##
 ## centrel mouse thing      ##
