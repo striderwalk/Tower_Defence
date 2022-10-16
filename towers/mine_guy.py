@@ -4,6 +4,7 @@ import itertools
 from shots import Mine
 from load import path, image
 from conts import TILE_SIZE, FPS
+
 PATH = path.get_path()
 
 

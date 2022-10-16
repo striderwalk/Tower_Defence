@@ -1,5 +1,6 @@
 import itertools
 from os import environ
+
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
 from conts import WIDTH, HEIGHT, FPS, WHITE
