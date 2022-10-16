@@ -1,7 +1,6 @@
 import numpy as np
 import math
 import json
-from conts import WIDTH, HEIGHT, TILE_SIZE
 import pygame
 from load import path, image
 
@@ -43,7 +42,6 @@ class Enemy(object):
         """rotate a Surface, maintaining position."""
 
         surf = self.img_surf.copy()
-        topleft = self.pos[0] - self.size / 2, self.pos[1] - self.size / 2
         rotated_image = pygame.transform.rotozoom(image, angle, 1)
         new_rect = rotated_image.get_rect(center=image.get_rect().center)
 

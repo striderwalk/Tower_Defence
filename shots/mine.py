@@ -1,6 +1,5 @@
 import math
 import pygame
-import glob
 from conts import FPS, TILE_SIZE
 from load import image
 import itertools

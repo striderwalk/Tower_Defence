@@ -1,16 +1,14 @@
-import json
 import itertools
 from os import environ
-
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
-from conts import *
+from conts import WIDTH, HEIGHT, FPS, WHITE
 import enemys
 import towers
 import shots
-from load import path, image
 import health_bar
 from turret_menu import Menu
+from death_screen import death
 
 ############# TODO ###########
 ## add money / buying stuff ##
@@ -18,52 +16,11 @@ from turret_menu import Menu
 ## death screen             ##
 ## fix turret shooting      ##
 ## centrel mouse thing      ##
+## fix mine animation       ##
 ##############################
 
 f = pygame.font.init()
 f = pygame.font.SysFont("ariali", 60)
-
-def death(win, clock):
-    dead_text = image.get_image("./assests/dead.png", (256 * 1.4, 96 * 1.4))
-    x = WIDTH / 2 - dead_text.get_width() / 2
-    max_y = HEIGHT / 2 - dead_text.get_height() / 2
-    y = 0
-
-    background = win.copy()
-    background.set_alpha(150)
-
-    while y <= max_y:
-        y += 6
-        win.blit(background, (0, 0))
-        win.blit(dead_text, (x, y))
-
-
-        # check for input
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                return
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    return
-
-        pygame.display.update()
-        win.fill((0, 0, 0))
-        clock.tick(FPS)
-
-    while True:
-        # check for input
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                return
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    return
 
 
 def main():
@@ -71,6 +28,7 @@ def main():
     # set up pygame
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("Tower Defense")
     clock = pygame.time.Clock()
 
     # set up game eg payers
@@ -98,7 +56,7 @@ def main():
         win.blit(bar, (WIDTH - bar.get_width(), HEIGHT - bar.get_height()))
         side_bar.update(win)
 
-        if run == False:
+        if not run:
             break
 
         # print(active_enemys, health)

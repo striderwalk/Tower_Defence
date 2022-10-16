@@ -1,6 +1,5 @@
 import pygame
 from load import image
-from PIL import Image
 import json
 
 

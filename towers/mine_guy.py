@@ -1,12 +1,9 @@
-import numpy as np
 import math
-from conts import WIDTH, HEIGHT, TILE_SIZE, FPS
-from shots import Mine
 from random import random
-import pygame
-from load import path, image
 import itertools
-
+from shots import Mine
+from load import path, image
+from conts import TILE_SIZE, FPS
 PATH = path.get_path()
 
 

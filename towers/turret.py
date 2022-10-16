@@ -1,6 +1,4 @@
-import numpy as np
 import math
-from conts import WIDTH, HEIGHT
 from shots import Bullet
 import pygame
 from load import image
@@ -9,7 +7,7 @@ from load import image
 class Turret(object):
 
     base_image = "./assests/gun.png"
-    
+
     def __init__(self, pos):
         self.size = 90
         self.pos = pos[0] - self.size / 2, pos[1] - self.size / 2
@@ -29,7 +27,6 @@ class Turret(object):
         """rotate a Surface, maintaining position."""
 
         surf = self.img_surf.copy()
-        topleft = self.pos[0] - self.size / 2, self.pos[1] - self.size / 2
         rotated_image = pygame.transform.rotozoom(image, angle, 1)
         new_rect = rotated_image.get_rect(center=image.get_rect().center)
 

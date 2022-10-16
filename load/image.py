@@ -1,5 +1,6 @@
 import pygame
-import glob, os
+import glob
+import os
 from conts import TILE_SIZE
 
 DEFULT_SIZE = (TILE_SIZE, TILE_SIZE)

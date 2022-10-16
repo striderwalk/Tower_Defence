@@ -3,7 +3,7 @@ from os import environ
 
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
-from conts import *
+from conts import WIDTH, HEIGHT, TILE_SIZE
 
 8
 tile_map = {
@@ -94,7 +94,6 @@ def make(level, path):
     # set up pygame
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
-    clock = pygame.time.Clock()
 
     keys = tile_map.keys()
     for y, row in enumerate(level):

@@ -41,8 +41,8 @@ class Bullet:
             hits[min_index].hit()
             return "die"
 
-    def die():
-        self.deat = True
+    def die(self):
+        self.death = True
 
     def draw(self, win):
         pygame.draw.circle(win, (RED), self.move(), 5)

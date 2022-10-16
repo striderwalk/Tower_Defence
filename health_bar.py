@@ -1,8 +1,4 @@
 import pygame
-import pygame.gfxdraw
-from conts import WIDTH, HEIGHT
-import math
-import numpy as np
 import make_layers
 
 
