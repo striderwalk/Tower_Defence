@@ -1,6 +1,5 @@
 import pygame
 from player import Player
-from load import image, path
 import enemys
 import towers
 import shots
@@ -19,7 +18,8 @@ class Game:
 
         # update game objects
         self.enemys = enemys.update(surf, self.enemys, self.player)
-        self.turrets, new_bullets = towers.update(surf, self.turrets, self.enemys)
+        self.turrets, new_bullets = towers.update(
+            surf, self.turrets, self.enemys)
         self.bullets.extend(new_bullets)
         self.bullets = shots.update(surf, self.bullets, self.enemys)
 

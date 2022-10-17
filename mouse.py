@@ -10,7 +10,7 @@ def get_pos() -> dict:
     if pos[0] < SIDEBAR_WIDTH:  ## check if over sidebar
         return {"type": "pos", "zone": "SIDEBAR", "value": pos}
 
-    pos = pos[0]-SIDEBAR_WIDTH, pos[1]
+    pos = pos[0] - SIDEBAR_WIDTH, pos[1]
     return {"type": "pos", "zone": "MAIN", "value": pos}
 
 

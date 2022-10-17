@@ -1,11 +1,10 @@
 import json
 from os import environ
-
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
 from conts import WIDTH, HEIGHT, TILE_SIZE
 
-8
+
 tile_map = {
     "b": "./assests/base_tile.png",
     "r": "./assests/right_arrow.png",
@@ -117,7 +116,8 @@ def make(level, path):
 
     with open("./level/path.json", "w") as file:
         grid = [
-            (int((i[0] / TILE_SIZE) - 0.5) - 1, int((i[1] / TILE_SIZE) - 0.5) - 1)
+            (int((i[0] / TILE_SIZE) - 0.5) - 1,
+             int((i[1] / TILE_SIZE) - 0.5) - 1)
             for i in path[:-1]
         ]
         data = {"cords": path, "grid": grid}

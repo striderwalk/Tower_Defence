@@ -25,4 +25,7 @@ class Player:
 
     def draw(self, surf):
         bar = health_bar.get(self.health / 100)
-        surf.blit(bar, (surf.get_width() - bar.get_width(), surf.get_height() - bar.get_height()))
+        x = surf.get_width() - bar.get_width()
+        y = surf.get_height() - bar.get_height())
+
+        surf.blit(bar, x, y)

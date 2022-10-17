@@ -1,7 +1,8 @@
 import numpy as np
 import math
-import json
 import pygame
+
+import image_utils
 from load import path, image
 
 
@@ -32,21 +33,10 @@ class Enemy(object):
         self.next_angles = [self.angle]
 
         self.base_image = image.get_image(
-            "./assests/enemy2-export.png", self.size, rotate=self.angle
-        )
+            "./assests/enemy2-export.png", self.size, rotate=self.angle)
+
         self.image = self.base_image
         self.img_surf = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
-
-    def rot_center(self, image, angle):
-        # https://stackoverflow.com/questions/4183208/how-do-i-rotate-an-image-around-its-center-using-pygame#:~:text=at%2012%3A43-,rabbid76,-188k2525%20gold%20badges109109
-        """rotate a Surface, maintaining position."""
-
-        surf = self.img_surf.copy()
-        rotated_image = pygame.transform.rotozoom(image, angle, 1)
-        new_rect = rotated_image.get_rect(center=image.get_rect().center)
-
-        surf.blit(rotated_image, new_rect)
-        return surf
 
     @property
     def pos(self):
@@ -99,7 +89,8 @@ class Enemy(object):
     def update_image(self):
         if len(self.next_angles) > 0:
             self.angle = self.next_angles.pop(0)
-        self.image = self.rot_center(self.base_image, self.angle)
+        self.image = image_utils.rot_center(
+            self.img_surf.copy(), self.base_image, self.angle)
 
     def draw(self, win):
         self.update_image()

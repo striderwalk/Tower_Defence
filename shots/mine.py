@@ -62,8 +62,7 @@ class Mine:
             return
 
         if hit:
-            if not pygame.mixer.music.get_busy():
-                pygame.mixer.music.play(loops=0)
+
             self.images = image.get_images("./assests/explotion", self.size * 2)
             self.img_time = 0
             self.life_left = 900

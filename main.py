@@ -3,13 +3,12 @@ from os import environ
 
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
-from conts import WIDTH, HEIGHT, FPS, WHITE, SIDEBAR_WIDTH
 
-
+import mouse
 from turret_menu import Menu
 from death_screen import death
-import mouse
 from game import Game
+from conts import WIDTH, HEIGHT, FPS, WHITE, SIDEBAR_WIDTH
 
 ############# TODO ###########
 ## add money / buying stuff ##
@@ -17,6 +16,7 @@ from game import Game
 ##    - location checker    ##
 ## death screen             ##
 ## fix mine animation       ##
+## make turret rot smoother ##
 ##############################
 
 f = pygame.font.init()
@@ -28,7 +28,7 @@ def main():
     # set up pygame
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
-    surf = pygame.Surface((WIDTH-SIDEBAR_WIDTH, HEIGHT))
+    surf = pygame.Surface((WIDTH - SIDEBAR_WIDTH, HEIGHT))
     pygame.display.set_caption("Tower Defense")
     clock = pygame.time.Clock()
 
@@ -71,7 +71,7 @@ def main():
                     enemy = enemy_type(pos)
                     game.turrets.append(enemy)
 
-        ## update pygame ##
+        # update pygame
         clock.tick(FPS)
         pygame.display.flip()
         win.fill(WHITE)
