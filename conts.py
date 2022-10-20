@@ -4,6 +4,7 @@ TILE_SIZE = 104
 SIDEBAR_WIDTH = 104
 FPS = 60
 # colours
+DAT_COLOUR = (0, 255, 255)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)

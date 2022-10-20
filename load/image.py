@@ -6,7 +6,7 @@ from conts import TILE_SIZE
 DEFULT_SIZE = (TILE_SIZE, TILE_SIZE)
 
 
-def get_image(path, size=DEFULT_SIZE, rotate=0):
+def get_image(path, size=DEFULT_SIZE, rotate=0, unalt=False):
     if type(size) in [float, int]:
         size = (size, size)
     if not os.path.exists(path):
@@ -14,9 +14,11 @@ def get_image(path, size=DEFULT_SIZE, rotate=0):
         print(path)
         path = "./assests/fail.png"
     image = pygame.image.load(path)
+    pygame.Surface.convert_alpha(image)
+    if unalt:
+        return image
     image = pygame.transform.scale(image, size)
     image = pygame.transform.rotozoom(image, rotate, 1)
-    pygame.Surface.convert_alpha(image)
 
     return image
 

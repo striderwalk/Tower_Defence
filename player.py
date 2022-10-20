@@ -1,6 +1,3 @@
-import health_bar
-
-
 class Player:
     """
     deal with health and money
@@ -11,7 +8,8 @@ class Player:
         self.score = score
         self.dead = False
 
-    def update(self):
+    def update(self, dead_count):
+        self.score += dead_count
         if self.dead:
             raise RuntimeError("player dead but ask to update")
 
@@ -26,6 +24,6 @@ class Player:
     def draw(self, surf):
         bar = health_bar.get(self.health / 100)
         x = surf.get_width() - bar.get_width()
-        y = surf.get_height() - bar.get_height())
+        y = surf.get_height() - bar.get_height()
 
-        surf.blit(bar, x, y)
+        surf.blit(bar, (x, y))

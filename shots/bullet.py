@@ -6,7 +6,7 @@ from conts import RED, WIDTH, HEIGHT
 class Bullet:
     def __init__(self, pos, angle, speed):
         self.pos = pos
-        self.angle = angle  ## radients
+        self.angle = angle  # radients
         self.speed = speed
         self.dead = False
 
@@ -39,7 +39,8 @@ class Bullet:
         min_index = None
 
         for index, i in enumerate(hits):
-            dis = math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
+            dis = math.hypot(enemy.pos[0] - self.pos[0],
+                             enemy.pos[1] - self.pos[1])
             if dis < min_dis:
                 min_dis = dis
                 min_index = index

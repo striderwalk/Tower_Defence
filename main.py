@@ -1,6 +1,6 @@
 import itertools
+import sys
 from os import environ
-
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
 
@@ -12,10 +12,13 @@ from conts import WIDTH, HEIGHT, FPS, WHITE, SIDEBAR_WIDTH
 
 ############# TODO ###########
 ## add money / buying stuff ##
-## placeing code            ##
+## placing code URGENT      ##
 ##    - location checker    ##
-## death screen             ##
+##      - general valid pos ##
+##      - specific for type ##
+## death screen -improve    ##
 ## fix mine animation       ##
+## spell assests right      ##
 ## make turret rot smoother ##
 ##############################
 
@@ -29,7 +32,7 @@ def main():
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
     surf = pygame.Surface((WIDTH - SIDEBAR_WIDTH, HEIGHT))
-    pygame.display.set_caption("Tower Defense")
+    pygame.display.set_caption("Tower Defence")
     clock = pygame.time.Clock()
 
     # set up game eg payers
@@ -44,10 +47,17 @@ def main():
         if len(game.enemys) <= 10:
             if frame % 120 == 0:
                 game.add_enemy()
-        draw_surf = game.update(surf.copy())
-        win.blit(draw_surf, (SIDEBAR_WIDTH, 0))
+        dat = game.update(surf.copy())
+        draw_surf = dat["surf"]
 
+        # draw screen
+        win.blit(draw_surf, (SIDEBAR_WIDTH, 0))
         side_bar.update(win)
+
+        # handle the losing event
+        if dat["dead"] == True:
+            death(win, clock)
+            sys.exit()
 
         if not run:
             break

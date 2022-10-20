@@ -26,6 +26,7 @@ class Enemy(object):
         self.count = -1
         self.speed = 5
         self.dead = False
+        self.killed = False
         self.size = 90
         self.health = 100
         self.angle = 180
@@ -79,6 +80,8 @@ class Enemy(object):
         return {"type": "move", "value": self.pos}
 
     def die(self, move=True):
+        if self.health <= 0:
+            self.killed = True
         if move:
             self.count = float("inf")
         self.dead = True

@@ -1,0 +1,35 @@
+{ "frames": {
+   "scoreboard (BAR).aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 194, "h": 60 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 194, "h": 60 },
+    "sourceSize": { "w": 194, "h": 60 },
+    "duration": 100
+   },
+   "scoreboard (dat).aseprite": {
+    "frame": { "x": 0, "y": 60, "w": 194, "h": 60 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 194, "h": 60 },
+    "sourceSize": { "w": 194, "h": 60 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.39-dev",
+  "image": "scoreboard.png",
+  "format": "RGBA8888",
+  "size": { "w": 194, "h": 120 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "BAR", "opacity": 255, "blendMode": "normal" },
+   { "name": "dat", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

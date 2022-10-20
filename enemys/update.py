@@ -11,8 +11,12 @@ def update(win, enemys, player):
         if enemy.dead:
             new_dead.append(enemy)
 
+    dead_count = 0
     for enemy in new_dead:
         if enemy in enemys:
-            enemys.remove(enemy)
+            dead_count += 1
 
-    return enemys
+            if enemy.killed:
+                enemys.remove(enemy)
+
+    return enemys, dead_count
