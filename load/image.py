@@ -18,7 +18,8 @@ def get_image(path, size=DEFULT_SIZE, rotate=0, unalt=False):
     if unalt:
         return image
     image = pygame.transform.scale(image, size)
-    image = pygame.transform.rotozoom(image, rotate, 1)
+    if rotate != 0:
+        image = pygame.transform.rotozoom(image, rotate, 1)
 
     return image
 

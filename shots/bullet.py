@@ -39,8 +39,7 @@ class Bullet:
         min_index = None
 
         for index, i in enumerate(hits):
-            dis = math.hypot(enemy.pos[0] - self.pos[0],
-                             enemy.pos[1] - self.pos[1])
+            dis = math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
             if dis < min_dis:
                 min_dis = dis
                 min_index = index

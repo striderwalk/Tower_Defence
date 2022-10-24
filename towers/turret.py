@@ -37,8 +37,7 @@ class Turret(object):
     def update_image(self):
         self.angle += self.next_angle
         surf = self.img_surf.copy()
-        self.image = image_utils.rot_center(
-            surf, self.base_image, self.real_angle)
+        self.image = image_utils.rot_center(surf, self.base_image, self.real_angle)
 
     def update(self, enemys):
         self.time += 1
@@ -46,16 +45,14 @@ class Turret(object):
         min_dis = 1000000000
         close_enemy = None
         for enemy in enemys:
-            dis = math.hypot(enemy.pos[0] - self.pos[0],
-                             enemy.pos[1] - self.pos[1])
+            dis = math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
             if dis < min_dis:
                 min_dis = dis
                 close_enemy = enemy
 
         if close_enemy is not None:
             enemy = close_enemy
-            angle = math.atan2(
-                enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
+            angle = math.atan2(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
 
             self.next_angle = (math.degrees(angle) - self.angle) / 2
 

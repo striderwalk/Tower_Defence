@@ -14,14 +14,12 @@ class Mine_Shooter(object):
 
     def __init__(self, pos):
         self.pos = pos
-        self.grid_pos = (math.floor(
-            pos[0] / TILE_SIZE), math.floor(pos[1] / TILE_SIZE))
+        self.grid_pos = (math.floor(pos[0] / TILE_SIZE), math.floor(pos[1] / TILE_SIZE))
         self.time = -1
         self.fire_speed = 200
         self.size = 80
 
-        self.images = image.get_images(
-            "./assests/mine_launcher/open", self.size * 2)
+        self.images = image.get_images("./assests/mine_launcher/open", self.size * 2)
         self.cur_image = next(self.images)
         self.img_time = 0
         self.img_fps = 5

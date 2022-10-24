@@ -10,8 +10,7 @@ class Mine:
 
         self.size = 45
         self.pos = pos
-        self.images = itertools.cycle(
-            image.get_images("./assests/mine", self.size * 2))
+        self.images = itertools.cycle(image.get_images("./assests/mine", self.size * 2))
         self.cur_image = next(self.images)
         self.life_left = True
         self.dead = False
@@ -53,8 +52,7 @@ class Mine:
             if enemy.dead:
                 continue
             if (
-                math.hypot(enemy.pos[0] - self.pos[0],
-                           enemy.pos[1] - self.pos[1])
+                math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
                 < TILE_SIZE
             ):
                 hit.append(enemy)
@@ -65,8 +63,7 @@ class Mine:
 
         if hit:
 
-            self.images = image.get_images(
-                "./assests/explotion", self.size * 2)
+            self.images = image.get_images("./assests/explotion", self.size * 2)
             self.img_time = 0
             self.life_left = 900
 

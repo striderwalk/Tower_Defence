@@ -6,8 +6,7 @@ def make_bar(images, size, health_percent=1, /, layer_name="main_bar"):
 
     layer_name = f"healthbar ({layer_name}).aseprite"
     if 0 > health_percent or health_percent > 1:
-        raise ValueError(
-            f"health_percent must be between 0 and 1 {health_percent=}")
+        raise ValueError(f"health_percent must be between 0 and 1 {health_percent=}")
     swipe_x = health_percent * 222 + 13
 
     # setup
@@ -36,7 +35,7 @@ def get(health_percent):
     return img
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     pygame.init()
     pygame.display.set_mode((0, 0), pygame.HIDDEN)

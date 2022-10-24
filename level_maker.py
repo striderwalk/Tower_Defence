@@ -1,8 +1,9 @@
 import json
 from os import environ
+
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
-from conts import WIDTH, HEIGHT, TILE_SIZE
+from conts import WIDTH, HEIGHT, TILE_SIZE, SIDEBAR_WIDTH
 
 
 tile_map = {
@@ -89,7 +90,7 @@ def find_path(level, start):
         path.append(get_next(level, path[-1]))
 
 
-def make(level, path):
+def make(level, path, playable_zone):
     # set up pygame
     pygame.init()
     win = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -120,8 +121,24 @@ def make(level, path):
              int((i[1] / TILE_SIZE) - 0.5) - 1)
             for i in path[:-1]
         ]
-        data = {"cords": path, "grid": grid}
+        data = {"cords": path, "grid": grid, "zone": playable_zone}
         json.dump(data, file, indent=4)
+
+
+def get_playable_zone(level):
+    zone = []
+    for i, row in enumerate(level):
+        for j, value in enumerate(row):
+            if value == "b":
+                zone.append((i, j))
+
+    boxes = []
+    for y, x in zone:
+        top_left = (x * TILE_SIZE, y * TILE_SIZE)
+        bottem_right = (TILE_SIZE,  TILE_SIZE)
+        boxes.append((top_left, bottem_right))
+
+    return boxes
 
 
 if __name__ == "__main__":
@@ -134,5 +151,7 @@ if __name__ == "__main__":
         ["u", "b", "b", "b", "b", "b", "b"],
     ]
 
-    path = find_path(level, (0, 5))
-    make(level, path)
+    playable_zone = get_playable_zone(level)
+    start_pos = (0, 5)
+    path = find_path(level, start_pos)
+    make(level, path, playable_zone)

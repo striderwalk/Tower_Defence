@@ -1,10 +1,21 @@
 import pygame
-from load import path, image
-from conts import WIDTH, HEIGHT, SIDEBAR_WIDTH
+from conts import SIDEBAR_WIDTH, PLAYABLE_ZONES
+
+
+def check_placement(win, pos):
+    # pos = (pos[0] - SIDEBAR_WIDTH, pos[1])
+
+    for zone in PLAYABLE_ZONES:
+        if zone.collidepoint(pos):
+            # vaild placement
+            return True
+
+    # invaild placement
+    return False
 
 
 def get_pos() -> dict:
-    ## check pos of click ##
+    # check mouse pos
     pos = pygame.mouse.get_pos()
 
     if pos[0] < SIDEBAR_WIDTH:  # check if over sidebar

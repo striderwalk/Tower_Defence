@@ -19,8 +19,7 @@ class Game:
 
         # update game objects
         self.enemys, dead_count = enemys.update(surf, self.enemys, self.player)
-        self.turrets, new_bullets = towers.update(
-            surf, self.turrets, self.enemys)
+        self.turrets, new_bullets = towers.update(surf, self.turrets, self.enemys)
         self.bullets.extend(new_bullets)
         self.bullets = shots.update(surf, self.bullets, self.enemys)
 

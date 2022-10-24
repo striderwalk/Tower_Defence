@@ -22,8 +22,9 @@ font.set_italic(True)
 
 
 def make(score):
-    images, size = make_layers.make("./assests/scoreboard/scoreboard.png",
-                                    "./assests/scoreboard/scoreboard.json")
+    images, size = make_layers.make(
+        "./assests/scoreboard/scoreboard.png", "./assests/scoreboard/scoreboard.json"
+    )
 
     cords = find_colour(images["scoreboard (dat).aseprite"], DAT_COLOUR)
     surf = pygame.Surface(size, pygame.SRCALPHA)
@@ -42,11 +43,12 @@ def get(score):
     return make(score)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pygame.init()
     win = pygame.display.set_mode((800, 800))  # pygame.SRCALPHA)
-    imgs, size = make_layers.make("./assests/scoreboard/scoreboard.png",
-                                  "./assests/scoreboard/scoreboard.json")
+    imgs, size = make_layers.make(
+        "./assests/scoreboard/scoreboard.png", "./assests/scoreboard/scoreboard.json"
+    )
     c = 0
     while True:
         c += 1

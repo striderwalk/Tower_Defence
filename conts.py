@@ -1,8 +1,22 @@
+from load import path
+
+"""
+ zones
+ MAIN: (SIDEBAR_WIDTH,0) -- (WIDTH, HEIGHT)
+
+ SIDEBAR: (0,0) -- (SIDEBAR_WIDTH, HEIGHT)
+
+
+"""
+PLAYABLE_ZONES = path.get_zone()
+
 # constants
 WIDTH, HEIGHT = 832, 624
 TILE_SIZE = 104
 SIDEBAR_WIDTH = 104
 FPS = 60
+
+
 # colours
 DAT_COLOUR = (0, 255, 255)
 BLACK = (0, 0, 0)

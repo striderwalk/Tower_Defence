@@ -34,7 +34,8 @@ class Enemy(object):
         self.next_angles = [self.angle]
 
         self.base_image = image.get_image(
-            "./assests/enemy2-export.png", self.size, rotate=self.angle)
+            "./assests/enemy2-export.png", self.size, rotate=self.angle
+        )
 
         self.image = self.base_image
         self.img_surf = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
@@ -93,7 +94,8 @@ class Enemy(object):
         if len(self.next_angles) > 0:
             self.angle = self.next_angles.pop(0)
         self.image = image_utils.rot_center(
-            self.img_surf.copy(), self.base_image, self.angle)
+            self.img_surf.copy(), self.base_image, self.angle
+        )
 
     def draw(self, win):
         self.update_image()
