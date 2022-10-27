@@ -7,11 +7,10 @@ from load import path, image
 
 
 class Enemy(object):
-    """docstring for Enemy"""
 
     path_points = path.get_points()
 
-    def make_path(self):
+    def make_path(self) -> list[tuple[int]]:
         path = []
         for i in range(len(Enemy.path_points) - 1):
             p1 = Enemy.path_points[i]
@@ -41,13 +40,13 @@ class Enemy(object):
         self.img_surf = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
 
     @property
-    def pos(self):
+    def pos(self) -> tuple[float]:
         if math.isinf(self.count):
             return self.path[-1]
         return self.path[int(self.count)]
 
     @property
-    def body(self):
+    def body(self) -> pygame.Rect:
         return pygame.Rect(
             (
                 self.pos[0] - self.size / 2,
