@@ -3,7 +3,7 @@ from os import environ
 
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
-from conts import WIDTH, HEIGHT, TILE_SIZE, SIDEBAR_WIDTH
+from conts import WIDTH, HEIGHT, TILE_SIZE
 
 
 tile_map = {
@@ -117,8 +117,7 @@ def make(level, path, playable_zone):
 
     with open("./level/path.json", "w") as file:
         grid = [
-            (int((i[0] / TILE_SIZE) - 0.5) - 1,
-             int((i[1] / TILE_SIZE) - 0.5) - 1)
+            (int((i[0] / TILE_SIZE) - 0.5) - 1, int((i[1] / TILE_SIZE) - 0.5) - 1)
             for i in path[:-1]
         ]
         data = {"cords": path, "grid": grid, "zone": playable_zone}
@@ -135,7 +134,7 @@ def get_playable_zone(level):
     boxes = []
     for y, x in zone:
         top_left = (x * TILE_SIZE, y * TILE_SIZE)
-        bottem_right = (TILE_SIZE,  TILE_SIZE)
+        bottem_right = (TILE_SIZE, TILE_SIZE)
         boxes.append((top_left, bottem_right))
 
     return boxes

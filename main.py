@@ -1,10 +1,8 @@
 import itertools
 import sys
 from os import environ
-
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
-
 import mouse
 from turret_menu import Menu
 from death_screen import death
@@ -17,6 +15,7 @@ from conts import WIDTH, HEIGHT, FPS, WHITE, SIDEBAR_WIDTH
 ##    - location checker    ##
 ##      - for health bar .. ##
 ##      - specific for type ##
+##         eg if turret fit ##
 ## death screen -improve    ##
 ## fix mine animation       ##
 ## spell assests right      ##
@@ -24,15 +23,14 @@ from conts import WIDTH, HEIGHT, FPS, WHITE, SIDEBAR_WIDTH
 ##############################
 
 pygame.font.init()
-f = pygame.font.SysFont("ariali", 60)
+FONT = pygame.font.SysFont("ariali", 60)
 
 
 def main():
 
     # set up pygame
     pygame.init()
-    win = pygame.display.set_mode(
-        (WIDTH, HEIGHT))
+    win = pygame.display.set_mode((WIDTH, HEIGHT))
     surf = pygame.Surface((WIDTH - SIDEBAR_WIDTH, HEIGHT))
     pygame.display.set_caption("Tower Defence")
     clock = pygame.time.Clock()
@@ -57,7 +55,7 @@ def main():
         side_bar.update(win)
 
         # handle the losing event
-        if dat["dead"] == True:
+        if dat["dead"]:
             death(win, clock)
             sys.exit()
 
@@ -85,8 +83,10 @@ def main():
                     enemy = enemy_type(pos)
                     game.turrets.append(enemy)
 
+        text = FONT.render(F"FPS = {round(clock.get_fps())}", False, (0, 0, 0))
+        win.blit(text, (WIDTH - 10 - text.get_width(), 10))
         # update pygame
-        clock.tick(FPS)
+        # clock.tick(FPS)
         pygame.display.flip()
         win.fill(WHITE)
 

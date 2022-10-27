@@ -18,14 +18,13 @@ class Bullet:
 
         return self.pos
 
-    def update(self, enemys):
-        if (
-            self.pos[0] < 0
-            or self.pos[1] < 0
-            or self.pos[0] > WIDTH
-            or self.pos[1] > HEIGHT
-        ):
+    def update(self, enemys):   
+        # check if in bounds
+        invaild_x = self.pos[0] < 0 or self.pos[0] > WIDTH
+        invaild_y = self.pos[1] < 0 or self.pos[1] > HEIGHT
+        if invaild_x or invaild_y:
             self.die()
+
         hits = []
         for enemy in enemys:
             if enemy.dead:

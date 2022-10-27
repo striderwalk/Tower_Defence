@@ -16,7 +16,6 @@ def make(img_path, data_path):
 
     # load sprite sheet
     surf = image.get_image(img_path, unalt=True)
-    draw_surf = None
     cur_y = 0
 
     layers = {}

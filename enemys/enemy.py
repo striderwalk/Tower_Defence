@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import pygame
-
+from conts import WIDTH, HEIGHT
 import image_utils
 from load import path, image
 
@@ -58,6 +58,15 @@ class Enemy(object):
         )
 
     def move(self):
+
+        # check if in bounds
+        invaild_x = self.pos[0] < 0 or self.pos[0] > WIDTH
+        invaild_y = self.pos[1] < 0 or self.pos[1] > HEIGHT
+        if invaild_x or invaild_y:
+            self.die()
+            return {"type": "die"}
+
+        # check next angle
         if self.count < len(self.path) - 1:
             new_pos = self.path[int(self.count) + 1]
             dx = new_pos[0] - self.pos[0]
@@ -67,13 +76,15 @@ class Enemy(object):
             if len(self.next_angles) == 0 or self.next_angles[-1] != angle:
                 self.next_angles = list(np.linspace(self.angle, angle, 10))
 
+        # check for a sad event
         if self.health <= 0 or math.isinf(self.count):
             self.die()
             return {"type": "die"}
 
         self.count += self.speed
 
-        if self.count >= len(self.path) - 1:
+        # move
+        if self.count > len(self.path) - 1:
             self.die(move=False)
             self.count -= self.speed
             return {"type": "win", "value": self.pos}
@@ -101,7 +112,7 @@ class Enemy(object):
         self.update_image()
 
         pos = self.move()
-        if pos["type"] == "die":
+        if pos["type"] == "die" or self.dead:
             return "die"
         win.blit(self.image, (self.body[:2]))
         if pos["type"] == "win":

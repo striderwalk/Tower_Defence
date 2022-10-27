@@ -5,7 +5,7 @@ import towers
 tower_list = [towers.Turret, towers.Mine_Shooter]
 
 from load import image
-from conts import WIDTH, HEIGHT, SIDEBAR_WIDTH
+from conts import HEIGHT, SIDEBAR_WIDTH
 import mouse
 
 

@@ -20,10 +20,3 @@ class Player:
         if self.score >= cost:
             return True
         return False
-
-    def draw(self, surf):
-        bar = health_bar.get(self.health / 100)
-        x = surf.get_width() - bar.get_width()
-        y = surf.get_height() - bar.get_height()
-
-        surf.blit(bar, (x, y))

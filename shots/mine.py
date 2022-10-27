@@ -1,5 +1,4 @@
 import math
-import pygame
 from conts import FPS, TILE_SIZE
 from load import image
 import itertools
@@ -30,12 +29,9 @@ class Mine:
 
     @property
     def body(self):
-        return (
-            self.pos[0] - self.size,
-            self.pos[1] - self.size / 2,
-            self.size * 2,
-            self.size,
-        )
+        top_left = (self.pos[0] - self.size, self.pos[1] - self.size / 2)
+        bottem_right = (self.size * 2, self.size)
+        return (*top_left, *bottem_right)
 
     def update(self, enemys):
         if self.life_left is True:
@@ -51,10 +47,10 @@ class Mine:
         for enemy in enemys:
             if enemy.dead:
                 continue
-            if (
-                math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
-                < TILE_SIZE
-            ):
+
+            dis = math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1])
+
+            if dis < TILE_SIZE:
                 hit.append(enemy)
             # print(math.hypot(enemy.pos[0] - self.pos[0], enemy.pos[1] - self.pos[1]), hit)
 
