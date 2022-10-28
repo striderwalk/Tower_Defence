@@ -7,13 +7,13 @@ from conts import WIDTH, HEIGHT, TILE_SIZE
 
 
 tile_map = {
-    "b": "./assests/base_tile.png",
-    "r": "./assests/right_arrow.png",
-    "l": "./assests/left_arrow.png",
-    "u": "./assests/up_arrow.png",
-    "d": "./assests/down_arrow.png",
-    "lt": "./assests/left_turn.png",
-    "rt": "./assests/right_turn.png",
+    "b": "./assets/base_tile.png",
+    "r": "./assets/right_arrow.png",
+    "l": "./assets/left_arrow.png",
+    "u": "./assets/up_arrow.png",
+    "d": "./assets/down_arrow.png",
+    "lt": "./assets/left_turn.png",
+    "rt": "./assets/right_turn.png",
 }
 
 """ u

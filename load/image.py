@@ -12,7 +12,7 @@ def get_image(path, size=DEFULT_SIZE, rotate=0, unalt=False):
     if not os.path.exists(path):
         print("ERROR: image path not found")
         print(path)
-        path = "./assests/fail.png"
+        path = "./assets/fail.png"
     image = pygame.image.load(path)
     pygame.Surface.convert_alpha(image)
     if unalt:

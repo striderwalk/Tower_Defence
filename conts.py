@@ -1,4 +1,5 @@
 from load import path
+import pygame
 
 """
  zones
@@ -6,9 +7,13 @@ from load import path
 
  SIDEBAR: (0,0) -- (SIDEBAR_WIDTH, HEIGHT)
 
-
 """
 PLAYABLE_ZONES = path.get_zone()
+
+# fonts
+pygame.font.init()
+MENU_FONT = pygame.font.SysFont("ariali", 40)
+MENU_FONT.set_italic(True)
 
 # constants
 WIDTH, HEIGHT = 832, 624

@@ -18,7 +18,7 @@ class Bullet:
 
         return self.pos
 
-    def update(self, enemys):   
+    def update(self, enemys):
         # check if in bounds
         invaild_x = self.pos[0] < 0 or self.pos[0] > WIDTH
         invaild_y = self.pos[1] < 0 or self.pos[1] > HEIGHT

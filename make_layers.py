@@ -33,5 +33,5 @@ if __name__ == "__main__":
     pygame.init()
     pygame.display.set_mode((0, 0), pygame.HIDDEN)
     img, size = make(
-        "./assests/healthbar/healthbar.png", "./assests/healthbar/healthbar.json"
+        "./assets/healthbar/healthbar.png", "./assets/healthbar/healthbar.json"
     )

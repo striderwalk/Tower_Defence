@@ -9,7 +9,7 @@ class Mine:
 
         self.size = 45
         self.pos = pos
-        self.images = itertools.cycle(image.get_images("./assests/mine", self.size * 2))
+        self.images = itertools.cycle(image.get_images("./assets/mine", self.size * 2))
         self.cur_image = next(self.images)
         self.life_left = True
         self.dead = False
@@ -59,7 +59,7 @@ class Mine:
 
         if hit:
 
-            self.images = image.get_images("./assests/explotion", self.size * 2)
+            self.images = image.get_images("./assets/explotion", self.size * 2)
             self.img_time = 0
             self.life_left = 900
 

@@ -10,7 +10,7 @@ PATH = path.get_path()
 
 class Mine_Shooter(object):
 
-    base_image = "./assests/mine_launcher/open/open1.png"
+    base_image = "./assets/mine_launcher/open/open1.png"
 
     def __init__(self, pos):
         self.pos = pos
@@ -19,7 +19,7 @@ class Mine_Shooter(object):
         self.fire_speed = 200
         self.size = 80
 
-        self.images = image.get_images("./assests/mine_launcher/open", self.size * 2)
+        self.images = image.get_images("./assets/mine_launcher/open", self.size * 2)
         self.cur_image = next(self.images)
         self.img_time = 0
         self.img_fps = 5
@@ -50,7 +50,7 @@ class Mine_Shooter(object):
 
         if closet_point is not None:
             self.images = image.get_images(
-                "./assests/mine_launcher/close", self.size * 2
+                "./assets/mine_launcher/close", self.size * 2
             )
 
             x = (closet_point[0] + random() - 0.5) * TILE_SIZE * 0.9

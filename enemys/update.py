@@ -1,5 +1,4 @@
 def update(win, enemys, player):
-    new_dead = []
     for enemy in enemys:
         if not enemy.dead:
             res = enemy.draw(win)

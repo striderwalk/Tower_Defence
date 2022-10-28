@@ -7,7 +7,7 @@ import image_utils
 
 class Turret(object):
 
-    base_image = "./assests/gun.png"
+    base_image = "./assets/gun.png"
 
     def __init__(self, pos):
         self.size = 145
@@ -19,7 +19,7 @@ class Turret(object):
         self.base_angle = 90
         self.next_angle = self.angle
 
-        self.base_image = image.get_image("./assests/gun.png", self.size)
+        self.base_image = image.get_image("./assets/gun.png", self.size)
         self.image = self.base_image
         self.img_surf = pygame.Surface(self.image.get_size(), pygame.SRCALPHA)
 

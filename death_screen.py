@@ -4,7 +4,7 @@ from load import image
 
 
 def death(win, clock):
-    dead_text = image.get_image("./assests/dead.png", (256 * 1.4, 96 * 1.4))
+    dead_text = image.get_image("./assets/dead.png", (256 * 1.4, 96 * 1.4))
     x = WIDTH / 2 - dead_text.get_width() / 2
     max_y = HEIGHT / 2 - dead_text.get_height() / 2
     y = 0

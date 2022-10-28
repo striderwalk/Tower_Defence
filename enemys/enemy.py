@@ -33,7 +33,7 @@ class Enemy(object):
         self.next_angles = [self.angle]
 
         self.base_image = image.get_image(
-            "./assests/enemy2-export.png", self.size, rotate=self.angle
+            "./assets/enemy2-export.png", self.size, rotate=self.angle
         )
 
         self.image = self.base_image

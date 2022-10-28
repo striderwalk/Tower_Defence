@@ -1,10 +1,11 @@
 import itertools
 import sys
 from os import environ
+
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import pygame  # import after disabling prompt
 import mouse
-from turret_menu import Menu
+from menu import Turret_menu
 from death_screen import death
 from game import Game
 from conts import WIDTH, HEIGHT, FPS, WHITE, SIDEBAR_WIDTH
@@ -18,7 +19,6 @@ from conts import WIDTH, HEIGHT, FPS, WHITE, SIDEBAR_WIDTH
 ##         eg if turret fit ##
 ## death screen -improve    ##
 ## fix mine animation       ##
-## spell assests right      ##
 ## make turret rot smoother ##
 ##############################
 
@@ -37,7 +37,7 @@ def main():
 
     # set up game eg payers
     game = Game()
-    side_bar = Menu()
+    side_bar = Turret_menu()
 
     # game loop
     run = True
@@ -83,10 +83,10 @@ def main():
                     enemy = enemy_type(pos)
                     game.turrets.append(enemy)
 
-        text = FONT.render(F"FPS = {round(clock.get_fps())}", False, (0, 0, 0))
+        text = FONT.render(f"FPS = {round(clock.get_fps())}", False, (0, 0, 0))
         win.blit(text, (WIDTH - 10 - text.get_width(), 10))
         # update pygame
-        # clock.tick(FPS)
+        clock.tick(FPS)
         pygame.display.flip()
         win.fill(WHITE)
 

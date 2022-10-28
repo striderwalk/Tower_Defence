@@ -3,7 +3,7 @@ from player import Player
 import enemys
 import towers
 import shots
-import menu
+from menu import draw_menu
 
 
 class Game:
@@ -20,14 +20,13 @@ class Game:
 
         # update game objects
         self.enemys, dead_count = enemys.update(surf, self.enemys, self.player)
-        self.turrets, new_bullets = towers.update(
-            surf, self.turrets, self.enemys)
+        self.turrets, new_bullets = towers.update(surf, self.turrets, self.enemys)
         self.bullets.extend(new_bullets)
         self.bullets = shots.update(surf, self.bullets, self.enemys)
 
         # update player
         self.player.update(dead_count)
-        menu.draw(surf, self.player)
+        draw_menu(surf, self.player)
 
         if self.player.dead:
             return {"surf": surf, "dead": True}
